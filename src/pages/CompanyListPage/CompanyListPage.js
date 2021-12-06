@@ -29,15 +29,15 @@ export class CompanyListPage extends Component {
   }
   render() {
     var { company } = this.props;
-    console.log("company: ", company);
+    console.log("company company: ", company);
     return (
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <Link to="/company/add" className="btn btn-info">
-          Thêm công ty
+          Thêm hợp đồng
         </Link>
         <CompanyList>
           {this.showCompanyItem(company)}
-          {/* <CompanyItem /> */}
+          {/* <ompanyItem /> */}
         </CompanyList>
       </div>
     )

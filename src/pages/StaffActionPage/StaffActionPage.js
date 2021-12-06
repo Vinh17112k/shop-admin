@@ -10,11 +10,11 @@ export class StaffActionPage extends Component {
     super(props);
     this.state = {
       id: '',
-      // txtCompanyName:'',
       txtCode: "",
       txtName: '',
       daDateOfBirth: '',
-      txtPhone: ''
+      txtPhone: '',
+      txtCompanyId: '',
     }
   }
   onChange = (e) => {
@@ -26,35 +26,20 @@ export class StaffActionPage extends Component {
     })
   }
   onSave = (e) => {
-    var { id, txtCode, txtName, daDateOfBirth, txtPhone } = this.state;
+    var { id, txtCompanyId, txtCode, txtName, daDateOfBirth, txtPhone } = this.state;
     var { history } = this.props;
     var staff = {
       id: id,
       code: txtCode,
       name: txtName,
       dateOfBirth: daDateOfBirth,
-      phone: txtPhone
+      phone: txtPhone,
+      companyId: txtCompanyId
     }
     e.preventDefault();
     if (id) {
-      //sua
-      // callAPI("PUT",`products/${id}`,{
-      //     name: txtName,
-      //     price: txtPrice,
-      //     status: chkbStatus
-      // }).then(res=>{
-      //     history.goBack();
-      // })
-      //thay the bang actUpdateProductRequest
       this.props.onUpdateStaff(staff);
     } else {
-      // callAPI("POST", 'products',{
-      //     name: txtName,
-      //     price: txtPrice,
-      //     status: chkbStatus
-      // }).then(res=>{
-      //     history.goBack();
-      // })
       this.props.onAddStaff(staff)
 
     } history.goBack();
@@ -66,17 +51,7 @@ export class StaffActionPage extends Component {
     if (match) {
       //lay tham so url
       var idParam = match.params.id;
-      // callAPI("GET",`products/${idParam}`,null).then(res=>{
-      //     var data = res.data;
-      //     this.setState({
-      //         id:data.id,
-      //         txtName:data.name,
-      //         txtPrice: data.price,
-      //         chkbStatus: data.status
-      //     })
-      //     console.log(res.data);
-      // })
-      //thay the bang redux
+      console.log("idParam: ", idParam);
       console.log(this.props);
       this.props.onEditStaff(idParam);
     }
@@ -84,31 +59,44 @@ export class StaffActionPage extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.staffEditting) {
       var { staffEditting } = nextProps;
-      var {company} = this.props;
       this.setState({
         id: staffEditting.id,
-        txtCompanyName: company.name,
         txtCode: staffEditting.code,
         txtName: staffEditting.name,
         daDateOfBirth: staffEditting.dateOfBirth,
-        txtPhone: staffEditting.phone
+        txtPhone: staffEditting.phone,
+        txtCompanyId: staffEditting.companyId,
       })
     }
   }
+  showOption = (company) => {
+    var result = null;
+    result = company.map((item, index) => {
+      return <option name="txtCompanyName" value={this.state.txtCompanyName} index={index} key={index}>{item.name}</option>
+    })
+    return result;
+  }
+  showOptionId = (company) => {
+    var result = null;
+    result = company.map((item, index) => {
+      return <option name="txtCompanyId" value={this.state.txtCompanyId} index={index} key={index}>{item.id}</option>
+    })
+    return result;
+  }
   render() {
-    var { txtCompanyName, txtCode, txtName, daDateOfBirth, txtPhone } = this.state; //sua
+    var { txtCode, txtName, daDateOfBirth, txtPhone,  txtCompanyId} = this.state; //sua
+    console.log("company staff", this.props.company);
     return (
 
       <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
         <form onSubmit={this.onSave}>
           <div className="form-group">
-            <label>Company Name</label>
-            <select className="custom-select" name="categoryId" id="categoryId">
-              <option selected>Select Category</option>
-              <option value={txtCompanyName}
-                name="txtCompanyName"></option>
-            </select>
+            <label>Company Id</label>
+            {/* <select className="custom-select">
+              {this.showOptionId(this.props.company)}
+            </select> */}
+            <input type="number" className="form-control" id="" placeholder="Input field" name="txtCompanyId" value={txtCompanyId} onChange={this.onChange} />
           </div>
           <div className="form-group">
             <label >CMT</label>

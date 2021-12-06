@@ -147,7 +147,7 @@ export const actUpdateStaff=(staff)=>{
 //fetchService
 export const actFetchServicesRequest=()=>{
   return (dispatch)=>{
-      return callAPI("GET", 'services', null).then(res=>{
+      return callAPI("GET", 'services/list', null).then(res=>{
           dispatch(actFetchServices(res.data));
       })
   }
@@ -161,7 +161,7 @@ export const actFetchServices =(services)=>{
 //deleteService
 export const actDeleteServiceRequest=(id)=>{
   return (dispatch)=>{
-      return callAPI("DELETE", `services/${id}`, null).then(res=>{
+      return callAPI("DELETE", `services/delete/${id}`, null).then(res=>{
           dispatch(actDeleteService(id));
       })
   }
@@ -285,5 +285,77 @@ export const actUpdateStaffBuilding=(staffBuilding)=>{
   return {
       type: Types.UPDATE_STAFFBUILDING,
       staffBuilding
+  }
+}
+
+
+//fetch contract
+export const actFetchAllContractRequest=()=>{
+  return (dispatch)=>{
+      return callAPI("GET", 'contract', null).then(res=>{
+          dispatch(actFetchContracts(res.data));
+      })
+  }
+}
+export const actFetchContracts =(contracts)=>{
+  return {
+      type: Types.FETCH_CONTRACT,
+      contracts
+  }
+}
+//delete contract
+export const actDeleteContractRequest=(id)=>{
+  return (dispatch)=>{
+      return callAPI("DELETE", `contract/${id}`, null).then(res=>{
+          dispatch(actDeleteContract(id));
+      })
+  }
+}
+export const actDeleteContract=(id)=>{
+  return {
+      type: Types.DELETE_CONTRACT,
+      id
+  }
+}
+//add contract
+export const actAddContractfRequest=(contract)=>{
+  return (dispatch)=>{
+      return callAPI("POST", 'contract', contract).then(res=>{
+          dispatch(actAddContract(res.data));
+      })
+  }
+}
+export const actAddContract=(contract)=>{
+  return {
+      type: Types.ADD_CONTRACT,
+      contract
+  }
+}
+//editContract
+export const actEditContractRequest=(id)=>{
+  return (dispatch)=>{
+      return callAPI("GET", `contract/${id}`,null).then(res=>{
+          dispatch(actEditContract(res.data));
+      })
+  }
+}
+export const actEditContract=(contract)=>{
+  return {
+      type: Types.EDIT_CONTRACT,
+      contract
+  }
+}
+//upDateContract
+export const actUpdateContractRequest=(contract)=>{
+  return (dispatch)=>{
+      return callAPI("PUT", `contract/${contract.id}`,contract).then(res=>{
+          dispatch(actUpdateContract(res.data));
+      })
+  }
+}
+export const actUpdateContract=(contract)=>{
+  return {
+      type: Types.UPDATE_CONTRACT,
+      contract
   }
 }

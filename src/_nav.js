@@ -62,7 +62,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Danh sách dịch vụ',
-        to: '/company/list-groups',
+        to: '/services/list',
       },
       {
         component: CNavItem,
@@ -71,8 +71,8 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Popovers',
-        to: '/company/popovers',
+        name: 'Danh sách hợp đồng',
+        to: '/contract/list',
       },
       {
         component: CNavItem,

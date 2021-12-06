@@ -1,6 +1,7 @@
 import React from 'react'
 import CompanyActionPage from './pages/CompanyActionPage/CompanyActionPage'
 import CompanyListPage from './pages/CompanyListPage/CompanyListPage'
+import ContractListPage from './pages/ContractListPage/ContractListPage'
 import ServiceActionPage from './pages/ServiceActionPage/ServiceActionPage'
 import ServiceListPage from './pages/ServiceListPage/ServiceListPage'
 import StaffActionPage from './pages/StaffActionPage/StaffActionPage'
@@ -46,18 +47,23 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  // { path: '/home', name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Tổng quan', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Giới thiệu', component: Colors },
   { path: '/theme/typography', name: 'Thông tin liên hệ', component: Typography },
   { path: '/company/list', name: 'Danh sách công ty', component: CompanyListPage },
   { path: '/staffs/list', name: 'Danh sách nhân viên', component: StaffListPage },
-  { path: '/company/list-groups', name: 'Danh sách dịch vụ', component: ServiceListPage },
+  { path: '/services/list', name: 'Danh sách dịch vụ', component: ServiceListPage },
   {
     path: '/staffsbuilding/list',
     name: 'Danh sách nhân viên tòa nhà',
     component: StaffBuildingListPage,
+  },
+  {
+    path: '/contract/list',
+    name: 'Danh sách hợp đồng',
+    component: ContractListPage,
   },
   // eslint-disable-next-line prettier/prettier
   { path: '/company/add', name: 'Thêm công ty', component:({history})=><CompanyActionPage history={history} /> },

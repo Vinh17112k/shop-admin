@@ -1,5 +1,8 @@
+/* eslint-disable prettier/prettier */
 import React, { Component } from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
+import { Dashboard } from './pages/dashboard/dashboard'
+import LoginPage from './pages/LoginPage'
 import './scss/style.scss'
 
 const loading = (
@@ -23,7 +26,8 @@ class App extends Component {
       <HashRouter>
         <React.Suspense fallback={loading}>
           <Switch>
-            <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} />
+            {/* <Route exact path="/login" name="Login Page" render={(props) => <Login {...props} />} /> */}
+            <Route exact path="/" component={LoginPage} />
             <Route
               exact
               path="/register"

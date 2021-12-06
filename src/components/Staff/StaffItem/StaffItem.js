@@ -10,8 +10,19 @@ export class ProductItem extends Component {
       this.props.onDelete(id);
     }
   }
+  checkStaff=(company,staff)=>{
+      var result = null;
+      result = company.map((item, index) => {
+        if(item.id === staff.item.id)
+        result = item;
+      })
+      return result;
+  }
   render() {
-    var {index, staff} =this.props;
+    var {index,company, staff} =this.props;
+    // var result = this.checkStaff(company, staff)
+    console.log("staff is", staff);
+    console.log("staffcompany", staff.company)
     return (
       <tr>
         <td>{index+1}</td>
@@ -20,7 +31,7 @@ export class ProductItem extends Component {
         <td>{staff.name}</td>
         <td>{staff.dateOfBirth}</td>
         <td>{staff.phone}</td>
-        <td>{staff.company.name}</td>
+        {/* <td>{staff.company.name}</td> */}
         <td>
           <span>
             <button className="btn btn-danger" onClick={()=>this.onDelete(staff.id)}>Xoa</button>
