@@ -5,20 +5,31 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actAddContractRequest, actEditContractRequest, actUpdateContractRequest } from 'src/actions';
-import callAPI from 'src/utils/callAPI';
+import { isEmpty, isNumber } from 'validator';
+const required = (value) => {
+  if (isEmpty(value)) {
+    return <small className="form-text text-danger">This field is required</small>;
+  }
+}
+const number = (value) => {
+  if (!isNumber(value)) {
+    return <small className="form-text text-danger">Invalid number format</small>;
+  }
+}
 export class ContractActionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: '',
-      txtTaxCode: '',
       txtName: '',
-      flCharterCapital: '',
-      txtBusinessAreas: '',
-      numStaff: '',
-      txtRoomNumber: '',
-      txtPhone: '',
-      flArea: ''
+      txtDescription: '',
+      flSquare: '',
+      flCostPerSquare: '',
+      txtStartDate: '',
+      txtEndDate: '',
+      longRoomId: '',
+      longCompanyId: '',
+      // flTotalCost:''
     }
   }
   onChange = (e) => {
@@ -26,67 +37,67 @@ export class ContractActionPage extends Component {
     var name = target.name;
     var value = target.value;
     this.setState({
+      ...this.state,
       [name]: value
     })
+
   }
   onSave = (e) => {
-    var { id, txtTaxCode, txtName, flCharterCapital, txtBusinessAreas, numStaff, txtRoomNumber, txtPhone, flArea } = this.state;
+    var dataContract = this.props.contract;
+    console.log("dataContract", dataContract);
+    console.log("state", this.state);
+    var { room } = this.props;
+    console.log("room", room);
     var { history } = this.props
+    var { id, txtName, txtDescription, flCostPerSquare, txtStartDate, txtEndDate, flSquare, longRoomId, longCompanyId } = this.state;
+
     var contract = {
       id: id,
-      taxCode: txtTaxCode,
       name: txtName,
-      charterCapital: flCharterCapital,
-      businessAreas: txtBusinessAreas,
-      numberStaff: numStaff,
-      roomNumber: txtRoomNumber,
-      phone: txtPhone,
-      area: flArea
+      description: txtDescription,
+      square: flSquare,
+      costPerSquare: flCostPerSquare,
+      startDate: txtStartDate,
+      endDate: txtEndDate,
+      totalCost: flSquare * flCostPerSquare,
+      roomId: longRoomId,
+      companyId: longCompanyId,
+      // totalCost:flTotalCost
     }
+    var squareContract = contract[Object.keys(contract)[3]];
+    var roomId = contract[Object.keys(contract)[8]];
+    var roomSquare = this.getRoomSquare(room, roomId);
+    console.log("roomId", roomId);
+    console.log("square Contract", squareContract);
+    console.log("roomSquare ", roomSquare)
     e.preventDefault();
     if (id) {
-      // callAPI("PUT", `contract/${id}`, {
-      //   taxCode: txtTaxCode,
-      //   name: txtName,
-      //   charterCapital: flCharterCapital,
-      //   businessAreas: txtBusinessAreas,
-      //   numberStaff: numStaff,
-      //   roomNumber: txtRoomNumber,
-      //   phone: txtPhone,
-      //   area: flArea
-      // }).then(res => {
-      //   history.goBack();
-      // })
       this.props.onUpdateContract(contract);
     } else {
-      this.props.onAddContract(contract)
-
+      if (roomSquare > squareContract) {
+        console.log("Ok");
+        for (let i = 0; i < dataContract.length; i++) {
+          console.log("dataContract", dataContract[i])
+          if (dataContract[i].company.id == contract.companyId)
+            alert("Đã ký hợp đồng với công ty", dataContract[i].company.name)
+          break;
+        }
+        this.props.onAddContract(contract)
+        history.goBack();
+      } else {
+        alert("Phòng không đủ diện tích");
+      }
     }
-    history.goBack();
   }
   //sua
   componentDidMount() {
     console.log("componetDidMount: ");
+    var {contract, room}= this.props;
+    console.log("dataContract", contract);
+    console.log("dataRoom", room);
     var { match } = this.props;
     if (match) {
-      // lay tham so url
       var idParam = match.params.id;
-      // callAPI("GET", `contract/${idParam}`, null).then(res => {
-      //   var data = res.data;
-      //   this.setState({
-      //     id: data.id,
-      //     txtTaxCode: data.taxCode,
-      //     txtName: data.name,
-      //     flCharterCapital: data.charterCapital,
-      //     txtBusinessAreas: data.businessAreas,
-      //     numStaff: data.numberStaff,
-      //     txtRoomNumber: data.roomNumber,
-      //     txtPhone: data.phone,
-      //     flArea: data.area
-      //   })
-      //   console.log(res.data);
-      // })
-      //thay the bang redux
       this.props.onEditProduct(idParam);
     }
   }
@@ -97,61 +108,90 @@ export class ContractActionPage extends Component {
 
       this.setState({
         id: itemEditting.id,
-          txtTaxCode:itemEditting.taxCode ,
-          txtName: itemEditting.name,
-          flCharterCapital: itemEditting.charterCapital,
-          txtBusinessAreas: itemEditting.businessAreas,
-          numStaff:itemEditting.numberStaff,
-          txtRoomNumber: itemEditting.roomNumber,
-          txtPhone: itemEditting.phone,
-          flArea: itemEditting.area
+        txtTaxCode: itemEditting.taxCode,
+        txtName: itemEditting.name,
+        flCharterCapital: itemEditting.charterCapital,
+        txtBusinessAreas: itemEditting.businessAreas,
+        numStaff: itemEditting.numberStaff,
+        txtRoomNumber: itemEditting.roomNumber,
+        txtPhone: itemEditting.phone,
+        flArea: itemEditting.area
       })
     }
   }
+  getRoomSquare(dataRoom, roomId) {
+    var result = null;
+    for (let i = 0; i < dataRoom.length; i++) {
+      if (dataRoom[i].id == roomId)
+        result = dataRoom[i].restSquare;
+    }
+    return result;
+  }
+  showOptionCompanyId = (company) => {
+    var result = null;
+    result = company.map((item, index) => {
+      return <option required validations={[required, number]} index={index} value={item.id} key={index}>{item.id}</option>
+    })
+    return result;
+  }
+  showOptionRoomId = (room) => {
+    var result = null;
+    result = room.map((item, index) => {
+      return <option required validations={[required]} index={index} value={item.id} key={index}>{item.id}</option>
+    })
+    return result;
+  }
   render() {
-    var { txtTaxCode, txtName, flCharterCapital, txtBusinessAreas, numStaff, txtRoomNumber, txtPhone, flArea } = this.state; //sua
+    var { txtName, txtDescription, txtStartDate, txtEndDate, flCostPerSquare, flSquare, longRoomId, longCompanyId } = this.state; //sua
     return (
 
       <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
         <form onSubmit={this.onSave}>
           <div className="form-group">
-            <label >Mã số thuế</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtTaxCode" value={txtTaxCode} onChange={this.onChange} />
-          </div>
-          <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Tên</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtName" value={txtName} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtName" value={txtName} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
-            <label >Vốn điều lệ</label>
-            <input type="number" className="form-control" id="" placeholder="Input field" name="flCharterCapital" value={flCharterCapital} onChange={this.onChange} />
+            <label >Mô tả</label>
+            <input type="text" required className="form-control" id="" placeholder="Input field" name="txtDescription" value={txtDescription} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
-            <label >Lĩnh vực</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtBusinessAreas" value={txtBusinessAreas} onChange={this.onChange} />
+            <label >Ngày thuê</label>
+            <input type="text" className="form-control" id="" placeholder="Input field" name="txtStartDate" value={txtStartDate} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
-            <label >Nhân viên</label>
-            <input type="number" className="form-control" id="" placeholder="Input field" name="numStaff" value={numStaff} onChange={this.onChange} />
+            <label >Ngày thanh toán</label>
+            <input type="text" className="form-control" id="" placeholder="Input field" name="txtEndDate" value={txtEndDate} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
-            <label >Phòng</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtRoomNumber" value={txtRoomNumber} onChange={this.onChange} />
-          </div>
-          <div className="form-group">
-            {/* value de do du lieu thanh cong */}
-            <label >Điện thoại</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtPhone" value={txtPhone} onChange={this.onChange} />
-          </div>
-          <div className="form-group">
             <label >Diện tích</label>
-            <input type="number" className="form-control" id="" placeholder="Input field" name="flArea" value={flArea} onChange={this.onChange} />
+            <input type="number" required validations={[required]} className="form-control" id="" placeholder="Input field" name="flSquare" value={flSquare} onChange={this.onChange} />
+          </div>
+          <div className="form-group">
+            {/* value de do du lieu thanh cong */}
+            <label >Giá thành</label>
+            <input type="number" required validations={[required]} className="form-control" id="" placeholder="Input field" name="flCostPerSquare" value={flCostPerSquare} onChange={this.onChange} />
+          </div>
+          <div className="form-group">
+            <label>Room Id</label>
+            <select required validations={[required]} className="custom-select" name="longRoomId" value={this.state.longRoomId} onChange={this.onChange}>
+              <option>Select Id</option>
+              {this.showOptionRoomId(this.props.room)}
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Company Id</label>
+            <select required validations={[required]} className="custom-select" name="longCompanyId" value={this.state.longCompanyId} onChange={this.onChange}>
+              <option value="">Select Id</option>
+              {this.showOptionCompanyId(this.props.company)}
+            </select>
+            {/* <input type="number" className="form-control" id="" placeholder="Input field" name="longCompanyId" value={longCompanyId} onChange={this.onChange} /> */}
           </div>
           <Link to='/contract/list' className='btn btn-success'>Tro lai</Link>
           <button type="submit" className="btn btn-primary">Submit</button>
@@ -164,7 +204,10 @@ export class ContractActionPage extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    itemEditting: state.itemEditting
+    itemEditting: state.itemEditting,
+    company: state.allCompany,
+    contract: state.allContract,
+    room: state.allRoom
   }
 }
 const mapDispatchToProps = (dispatch, props) => {

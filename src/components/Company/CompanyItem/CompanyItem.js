@@ -3,7 +3,19 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-
+import CIcon from '@coreui/icons-react'
+import {
+  cilBell,
+  cilCalculator,
+  cilChartPie,
+  cilDrop,
+  cilNotes,
+  cilPencil,
+  cilRecycle,
+  cilPuzzle,
+  cilSpeedometer,
+  cilStar,
+} from '@coreui/icons'
 export class CompanyItem extends Component {
   onDelete = (id) => {
     if (confirm("Ban chac chan muon xoa?")) //eslint-disable-line
@@ -27,9 +39,9 @@ export class CompanyItem extends Component {
         <td>{companyItem.area}</td>
         <td>
           <span>
-            <button className="btn btn-danger" onClick={()=>this.onDelete(companyItem.id)}>Xoa</button>
+            <button className="btn btn-danger" onClick={()=>this.onDelete(companyItem.id)}  style={{color: 'white'}}><CIcon icon={cilRecycle}  style={{color: '#000'}}/>Xóa</button>
           </span>
-          <Link to={`/company/${companyItem.id}/edit`} className="btn btn-success">Sua</Link>
+          <Link to={`/company/${companyItem.id}/edit`} className="btn btn-success"  style={{color: 'white'}}><CIcon icon={cilPencil}  style={{color: '#000'}}/>Sửa</Link>
         </td>
       </tr>
     )

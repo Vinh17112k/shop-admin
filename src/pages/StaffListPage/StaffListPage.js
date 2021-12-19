@@ -6,6 +6,9 @@ import StaffList from 'src/components/Staff/StaffList/StaffList'
 import StaffItem from 'src/components/Staff/StaffItem/StaffItem'
 import { connect } from 'react-redux'
 import { actDeleteStaffRequest, actFetchStaffsRequest } from 'src/actions'
+import CIcon from '@coreui/icons-react'
+import { cilPlus } from '@coreui/icons'
+import Search from 'src/components/Search/Search'
 export class StaffListPage extends Component {
   componentDidMount (){
     this.props.fetchStaffs();
@@ -14,12 +17,19 @@ export class StaffListPage extends Component {
     this.props.onDeleteStaff(id);
   }
   render() {
-    var {staffs} = this.props;
+    var { staffs,keyword } = this.props;
+    staffs = staffs.filter((item) => {
+      return item.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+    });
+    console.log("staffs staffs: ", staffs);
     return (
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <Link to="/staffs/add" className="btn btn-info mb-10">
-          Them san pham
-        </Link>
+        <div className='row d-flex justify-content-between'>
+          <Link to="/staffs/add" className="btn btn-info col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+            <CIcon icon={cilPlus}/> Thêm nhan vien
+          </Link>
+          <Search />
+        </div>
         <StaffList>
           {this.showStaffs(staffs)}
         </StaffList>
@@ -37,7 +47,8 @@ export class StaffListPage extends Component {
 const mapStateToProps = (stateOfStore)=>{
   return {
     staffs: stateOfStore.staffs,
-    company: stateOfStore.allCompany
+    company: stateOfStore.allCompany,
+    keyword: stateOfStore.search
   }
 }
 const mapDispatchToProps =(dispatch, props)=>{

@@ -1,7 +1,10 @@
 import React from 'react'
 import CompanyActionPage from './pages/CompanyActionPage/CompanyActionPage'
 import CompanyListPage from './pages/CompanyListPage/CompanyListPage'
+import ContractActionPage from './pages/ContractActionPage/ContractActionPage'
 import ContractListPage from './pages/ContractListPage/ContractListPage'
+import RoomActionPage from './pages/RoomActionPage/RoomActionPage'
+import RoomListPage from './pages/RoomListPage/RoomListPage'
 import ServiceActionPage from './pages/ServiceActionPage/ServiceActionPage'
 import ServiceListPage from './pages/ServiceListPage/ServiceListPage'
 import StaffActionPage from './pages/StaffActionPage/StaffActionPage'
@@ -65,6 +68,11 @@ const routes = [
     name: 'Danh sách hợp đồng',
     component: ContractListPage,
   },
+  {
+    path: '/room/list',
+    name: 'Danh sách phòng',
+    component: RoomListPage,
+  },
   // eslint-disable-next-line prettier/prettier
   { path: '/company/add', name: 'Thêm công ty', component:({history})=><CompanyActionPage history={history} /> },
   {
@@ -93,6 +101,15 @@ const routes = [
     name: 'Popovers',
     component: ({ match, history }) => <StaffBuildingActionPage match={match} history={history} />,
   },
+  // eslint-disable-next-line prettier/prettier
+  { path: '/room/add', name: 'Thêm phòng', component:({history})=><RoomActionPage history={history} /> },
+  {
+    path: '/room/:id/edit',
+    name: 'Popovers',
+    component: ({ match, history }) => <RoomActionPage match={match} history={history} />,
+  },
+  // eslint-disable-next-line prettier/prettier
+  { path: '/contract/add', name: 'Thêm hợp đồng', component:({history})=><ContractActionPage history={history} /> },
   { path: '/company/progress', name: 'Progress', component: Progress },
   { path: '/company/spinners', name: 'Spinners', component: Spinners },
   { path: '/company/tables', name: 'Tables', component: Tables },

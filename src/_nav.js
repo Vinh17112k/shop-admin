@@ -76,8 +76,8 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Progress',
-        to: '/company/progress',
+        name: 'Danh sách phòng',
+        to: '/room/list',
       },
       {
         component: CNavItem,

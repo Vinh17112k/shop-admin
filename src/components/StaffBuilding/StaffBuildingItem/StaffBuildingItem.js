@@ -16,7 +16,7 @@ export class StaffBuildingItem extends Component {
       <tr>
         <td>{index+1}</td>
         <td>{staffBuilding.id}</td>
-        <td>{staffBuilding.code}</td>
+        <td>{staffBuilding.codeStaff}</td>
         <td>{staffBuilding.name}</td>
         <td>{staffBuilding.dateOfBirth}</td>
         <td>{staffBuilding.address}</td>

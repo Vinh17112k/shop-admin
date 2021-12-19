@@ -6,6 +6,23 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actAddServiceRequest, actEditServiceRequest, actUpdateServiceRequest } from '../../actions/index';
 import callAPI from 'src/utils/callAPI';
+import { isEmail, isEmpty, isNumber } from 'validator';
+const required = (value) => {
+  if (isEmpty(value)) {
+      return <small className="form-text text-danger">This field is required</small>;
+  }
+}
+
+const email = (value) => {
+  if (!isEmail(value)) {
+      return <small className="form-text text-danger">Invalid email format</small>;
+  }
+}
+const number = (value) => {
+  if (!isNumber(value)) {
+      return <small className="form-text text-danger">Invalid number format</small>;
+  }
+}
 export class ServiceActionPage extends Component {
   constructor(props) {
     super(props);
@@ -102,22 +119,22 @@ export class ServiceActionPage extends Component {
         <form onSubmit={this.onSave}>
           <div className="form-group">
             <label >Mã dịch vụ</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtCode" value={txtCode} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtCode" value={txtCode} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Tên</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtName" value={txtName} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtName" value={txtName} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Loại</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtType" value={txtType} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtType" value={txtType} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Giá</label>
-            <input type="number" className="form-control" id="" placeholder="Input field" name="txtCost" value={txtCost} onChange={this.onChange} />
+            <input type="number" required validations={[required,number]} className="form-control" id="" placeholder="Input field" name="txtCost" value={txtCost} onChange={this.onChange} />
           </div>
           <Link to='/services/list' className='btn btn-success'>Tro lai</Link>
           <button type="submit" className="btn btn-primary">Submit</button>

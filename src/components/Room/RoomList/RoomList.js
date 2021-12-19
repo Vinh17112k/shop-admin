@@ -2,13 +2,13 @@
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react'
 
-export class ContractList extends Component {
+export class RoomList extends Component {
   render() {
     return (
       <div>
         <div className="panel panel-primary">
           <div className="panel-heading">
-            <h3 className="panel-title">Danh sách hợp đồng</h3>
+            <h3 className="panel-title">Danh sách phòng</h3>
           </div>
         </div>
         <div className="panel-body">
@@ -16,22 +16,16 @@ export class ContractList extends Component {
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Mã hợp đồng</th>
-                <th>Tên người thuê</th>
-                <th>Tên Công ty</th>
+                <th>Id</th>
                 <th>Tên phòng</th>
-                <th>Mô tả</th>
                 <th>Diện tích</th>
-                <th>Giá thành</th>
-                <th>Ngày thuê</th>
-                <th>Ngày thanh toán</th>
-                <th>Tổng tiền</th>
-                <th>Trạng thái</th>
+                <th>Mô tả</th>
+                <th>Tầng</th>
                 <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
-                {this.props.children}
+              {this.props.children}
             </tbody>
           </table>
         </div>
@@ -40,4 +34,4 @@ export class ContractList extends Component {
   }
 }
 
-export default ContractList;
+export default RoomList

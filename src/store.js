@@ -9,7 +9,10 @@ import services from './reducers/serviceBuilding/services'
 import serviceEditting from './reducers/serviceBuilding/serviceEditting'
 import allContract from './reducers/contract/contract'
 import contractEditting from './reducers/contract/contractEditting'
+import allRoom from './reducers/room/room'
+import roomEditting from './reducers/room/roomEditting'
 import auth from './redux/reducers/auth'
+import search from './reducers/search/search'
 import { applyMiddleware, createStore } from 'redux'
 import { combineReducers } from 'redux'
 import thunk from 'redux-thunk'
@@ -37,7 +40,10 @@ const appReducers = combineReducers({
   staffsBuilding,
   allContract,
   contractEditting,
-  auth
+  allRoom,
+  roomEditting,
+  auth,
+  search
 })
 const store = createStore(appReducers,applyMiddleware(thunk))
 export default store
