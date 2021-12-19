@@ -1,15 +1,33 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/no-deprecated*/
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actAddCompanyRequest, actEditCompanyRequest, actUpdateCompanyRequest } from 'src/actions';
-import callAPI from 'src/utils/callAPI';
+import Validator from 'src/utils/validator';
+import { isEmail, isEmpty, isNumber } from 'validator';
+const required = (value) => {
+  if (isEmpty(value)) {
+      return <small className="form-text text-danger">This field is required</small>;
+  }
+}
+
+const email = (value) => {
+  if (!isEmail(value)) {
+      return <small className="form-text text-danger">Invalid email format</small>;
+  }
+}
+const number = (value) => {
+  if (!isNumber(value)) {
+      return <small className="form-text text-danger">Invalid number format</small>;
+  }
+}
 export class CompanyActionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      errors: {},
       id: '',
       txtTaxCode: '',
       txtName: '',
@@ -19,7 +37,7 @@ export class CompanyActionPage extends Component {
       txtRoomNumber: '',
       txtPhone: '',
       flArea: ''
-    }
+    };
   }
   onChange = (e) => {
     var target = e.target;
@@ -32,6 +50,7 @@ export class CompanyActionPage extends Component {
   onSave = (e) => {
     var { id, txtTaxCode, txtName, flCharterCapital, txtBusinessAreas, numStaff, txtRoomNumber, txtPhone, flArea } = this.state;
     var { history } = this.props
+
     var company = {
       id: id,
       taxCode: txtTaxCode,
@@ -109,53 +128,55 @@ export class CompanyActionPage extends Component {
     }
   }
   render() {
+    // const {errors} = this.state;
     var { txtTaxCode, txtName, flCharterCapital, txtBusinessAreas, numStaff, txtRoomNumber, txtPhone, flArea } = this.state; //sua
     return (
 
       <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-        <form onSubmit={this.onSave}>
+        <form  onSubmit={this.onSave} ref={c => { this.form = c }}>
           <div className="form-group">
             <label >Mã số thuế</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtTaxCode" value={txtTaxCode} onChange={this.onChange} />
+            <input type="text" required className="form-control" id="" placeholder="Input field" name="txtTaxCode" value={txtTaxCode} validations={[required, email]} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Tên</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtName" value={txtName} onChange={this.onChange} />
+            <input type="text" required className="form-control" id="" placeholder="Input field" name="txtName" value={txtName} validations={[required, email]} onChange={this.onChange} />
+            {/* {errors.txtName && <div className="validation" style={{display: 'block'}}>{errors.txtName}</div>} */}
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Vốn điều lệ</label>
-            <input type="number" className="form-control" id="" placeholder="Input field" name="flCharterCapital" value={flCharterCapital} onChange={this.onChange} />
+            <input type="number" required className="form-control" id="" placeholder="Input field" name="flCharterCapital" value={flCharterCapital} validations={[required, number]} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Lĩnh vực</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtBusinessAreas" value={txtBusinessAreas} onChange={this.onChange} />
+            <input type="text" required className="form-control" id="" placeholder="Input field" name="txtBusinessAreas" value={txtBusinessAreas} validations={[required, number]} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Nhân viên</label>
-            <input type="number" className="form-control" id="" placeholder="Input field" name="numStaff" value={numStaff} onChange={this.onChange} />
+            <input type="number" required className="form-control" id="" placeholder="Input field" name="numStaff" value={numStaff} validations={[required, number]} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Phòng</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtRoomNumber" value={txtRoomNumber} onChange={this.onChange} />
+            <input type="text" required className="form-control" id="" placeholder="Input field" name="txtRoomNumber" value={txtRoomNumber} validations={[required]} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Điện thoại</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtPhone" value={txtPhone} onChange={this.onChange} />
+            <input type="text" required className="form-control" id="" placeholder="Input field" name="txtPhone" value={txtPhone} validations={[required]} onChange={this.onChange} />
           </div>
           <div className="form-group">
             <label >Diện tích</label>
-            <input type="number" className="form-control" id="" placeholder="Input field" name="flArea" value={flArea} onChange={this.onChange} />
+            <input type="number" required className="form-control" id="" placeholder="Input field" name="flArea" value={flArea} validations={[required, number]} onChange={this.onChange} />
           </div>
           <Link to='/company/list' className='btn btn-success'>Tro lai</Link>
           <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        </form >
 
       </div>
 

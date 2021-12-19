@@ -40,3 +40,16 @@ export const EDIT_CONTRACT = 'EDIT_CONTRACT'
 export const AUTH_REQ = "AUTH_REQUEST";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAILURE = "AUTH_FAILUE";
+
+//room
+export const FETCH_ROOM = ' FETCH_ROOM '
+export const ADD_ROOM = ' ADD_ROOM '
+export const UPDATE_ROOM = 'UPDATE_ROOM'
+export const DELETE_ROOM = 'DELETE_ROOM'
+export const EDIT_ROOM = 'EDIT_ROOM'
+
+//search
+export const SEARCH = 'SEARCH';
+export const SORT_CONTRACT = 'SORT_CONTRACT';
+export const STATUS_CONTRACT = 'STATUS_CONTRACT';
+export const PAY_CONTRACT = 'PAY_CONTRACT';

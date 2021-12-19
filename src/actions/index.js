@@ -147,7 +147,7 @@ export const actUpdateStaff=(staff)=>{
 //fetchService
 export const actFetchServicesRequest=()=>{
   return (dispatch)=>{
-      return callAPI("GET", 'services/list', null).then(res=>{
+      return callAPI("GET", 'service/list', null).then(res=>{
           dispatch(actFetchServices(res.data));
       })
   }
@@ -161,7 +161,7 @@ export const actFetchServices =(services)=>{
 //deleteService
 export const actDeleteServiceRequest=(id)=>{
   return (dispatch)=>{
-      return callAPI("DELETE", `services/delete/${id}`, null).then(res=>{
+      return callAPI("DELETE", `service/delete/${id}`, null).then(res=>{
           dispatch(actDeleteService(id));
       })
   }
@@ -175,7 +175,7 @@ export const actDeleteService=(id)=>{
 //addService
 export const actAddServiceRequest=(service)=>{
   return (dispatch)=>{
-      return callAPI("POST", 'services', service).then(res=>{
+      return callAPI("POST", 'service', service).then(res=>{
           dispatch(actAddService(res.data));
       })
   }
@@ -189,7 +189,7 @@ export const actAddService=(service)=>{
 //editService
 export const actEditServiceRequest=(id)=>{
   return (dispatch)=>{
-      return callAPI("GET", `services/${id}`,null).then(res=>{
+      return callAPI("GET", `service/${id}`,null).then(res=>{
           dispatch(actEditService(res.data));
       })
   }
@@ -203,7 +203,7 @@ export const actEditService=(service)=>{
 //upDateService
 export const actUpdateServiceRequest=(service)=>{
   return (dispatch)=>{
-      return callAPI("PUT", `services/${service.id}`,service).then(res=>{
+      return callAPI("PUT", `service/${service.id}`,service).then(res=>{
           dispatch(actUpdateService(res.data));
       })
   }
@@ -248,7 +248,7 @@ export const actDeleteStaffBuilding=(id)=>{
 //addStaff
 export const actAddStaffBuildingRequest=(staffBuilding)=>{
   return (dispatch)=>{
-      return callAPI("POST", 'staffsbuilding', staffBuilding).then(res=>{
+      return callAPI("POST", 'staffsbuilding/create', staffBuilding).then(res=>{
           dispatch(actAddStaffBuilding(res.data));
       })
   }
@@ -276,7 +276,7 @@ export const actEditStaffBuilding=(staffBuilding)=>{
 //upDateStaff
 export const actUpdateStaffBuildingRequest=(staff)=>{
   return (dispatch)=>{
-      return callAPI("PUT", `staffsbuilding/${staff.id}`,staff).then(res=>{
+      return callAPI("PUT", `staffsbuilding/update/${staff.id}`,staff).then(res=>{
           dispatch(actUpdateStaffBuilding(res.data));
       })
   }
@@ -318,7 +318,7 @@ export const actDeleteContract=(id)=>{
   }
 }
 //add contract
-export const actAddContractfRequest=(contract)=>{
+export const actAddContractRequest=(contract)=>{
   return (dispatch)=>{
       return callAPI("POST", 'contract', contract).then(res=>{
           dispatch(actAddContract(res.data));
@@ -356,6 +356,126 @@ export const actUpdateContractRequest=(contract)=>{
 export const actUpdateContract=(contract)=>{
   return {
       type: Types.UPDATE_CONTRACT,
+      contract
+  }
+}
+
+
+
+//room
+export const actFetchAllRoomRequest=()=>{
+  return (dispatch)=>{
+      return callAPI("GET", 'room', null).then(res=>{
+          dispatch(actFetchAllRoom(res.data));
+      })
+  }
+}
+export const actFetchAllRoom =(allRoom)=>{
+  return {
+      type: Types.FETCH_ROOM,
+      allRoom
+  }
+}
+//xoa tren server roi moi xoa tren store
+export const actDeleteRoomRequest=(id)=>{
+  return (dispatch)=>{
+      return callAPI("DELETE", `room/${id}`, null).then(res=>{
+          dispatch(actDeleteRoom(id));
+      })
+  }
+}
+export const actDeleteRoom=(id)=>{
+  return {
+      type: Types.DELETE_ROOM,
+      id
+  }
+}
+//them cong ty
+export const actAddRoomRequest=(room)=>{
+  return (dispatch)=>{
+      return callAPI("POST", 'room', room).then(res=>{
+          dispatch(actAddRoom(res.data));
+      })
+  }
+}
+export const actAddRoom=(room)=>{
+  return {
+      type: Types.ADD_ROOM,
+      room
+  }
+}
+export const actEditRoomRequest=(id)=>{
+  return (dispatch)=>{
+      return callAPI("GET", `room/${id}`,null).then(res=>{
+          dispatch(actEditRoom(res.data));
+      })
+  }
+}
+export const actEditRoom=(room)=>{
+  return {
+      type: Types.EDIT_ROOM,
+      room
+  }
+}
+export const actUpdateRoomRequest=(room)=>{
+  return (dispatch)=>{
+      return callAPI("PUT", `room/${room.id}`,room).then(res=>{
+          dispatch(actUpdateRoom(res.data));
+      })
+  }
+}
+export const actUpdateRoom=(room)=>{
+  return {
+      type: Types.UPDATE_ROOM,
+      room
+  }
+}
+//search
+export const searchTask = (keyword) => {
+  return {
+      type : Types.SEARCH,
+      keyword // keyword : keyword
+  }
+}
+//sort totalCost
+export const actFetchAllContractCost=()=>{
+  return (dispatch)=>{
+      return callAPI("GET", 'contract/sort', null).then(res=>{
+          dispatch(sort(res.data));
+      })
+  }
+}
+export const sort =(contracts)=>{
+  return {
+      type: Types.SORT_CONTRACT,
+      contracts
+  }
+}
+//contract status pay
+export const actFetchContractStatus=()=>{
+  return (dispatch)=>{
+      return callAPI("GET", 'contract/findStatus', null).then(res=>{
+          dispatch(status(res.data));
+      })
+  }
+}
+export const status =(contracts)=>{
+  return {
+      type: Types.STATUS_CONTRACT,
+      contracts
+  }
+}
+//company pay contract
+export const actFetchContractPay=(id)=>{
+  return (dispatch)=>{
+      return callAPI("GET", `contract/pay/${id}`, null).then(res=>{
+          dispatch(pay(res.data));
+      })
+  }
+}
+export const pay =(contract)=>{
+  return {
+      type: Types.PAY_CONTRACT,
       contract
   }
 }

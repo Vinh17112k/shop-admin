@@ -5,6 +5,23 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actAddStaffBuildingRequest, actEditStaffBuildingRequest, actUpdateStaffBuildingRequest } from 'src/actions';
 import staffsBuilding from 'src/reducers/staffBuilding/staffsBuilding';
+import { isEmail, isEmpty, isNumber } from 'validator';
+const required = (value) => {
+  if (isEmpty(value)) {
+      return <small className="form-text text-danger">This field is required</small>;
+  }
+}
+
+const email = (value) => {
+  if (!isEmail(value)) {
+      return <small className="form-text text-danger">Invalid email format</small>;
+  }
+}
+const number = (value) => {
+  if (!isNumber(value)) {
+      return <small className="form-text text-danger">Invalid number format</small>;
+  }
+}
 export class StaffBuildingActionPage extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +49,7 @@ export class StaffBuildingActionPage extends Component {
     var { history } = this.props
     var staffBuilding = {
       id: id,
-      code: txtCode,
+      codeStaff: txtCode,
       name: txtName,
       dateOfBirth: daDateOfBirth,
       address: txtAddress,
@@ -90,7 +107,7 @@ export class StaffBuildingActionPage extends Component {
       var { itemEditting } = nextProps;
       this.setState({
         id: itemEditting.id,
-        txtCode: itemEditting.code,
+        txtCode: itemEditting.codeStaff,
         txtName: itemEditting.name,
         daDateOfBirth:itemEditting.dateOfBirth ,
         txtAddress: itemEditting.address,
@@ -101,7 +118,7 @@ export class StaffBuildingActionPage extends Component {
     }
   }
   render() {
-    var { txtCode, txtName, daDateOfBirth, txtAddress, txtPhone, txtLevel, txtPosition} = this.state; //sua
+    var {id, txtCode, txtName, daDateOfBirth, txtAddress, txtPhone, txtLevel, txtPosition} = this.state; //sua
     return (
 
       <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -109,36 +126,36 @@ export class StaffBuildingActionPage extends Component {
         <form onSubmit={this.onSave}>
           <div className="form-group">
             <label >Mã nhân viên</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtCode" value={txtCode} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtCode" value={txtCode} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Tên</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtName" value={txtName} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtName" value={txtName} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Ngày sinh</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="daDateOfBirth" value={daDateOfBirth} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="daDateOfBirth" value={daDateOfBirth} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Địa chỉ</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtAddress" value={txtAddress} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtAddress" value={txtAddress} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Điện thoại</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtPhone" value={txtPhone} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtPhone" value={txtPhone} onChange={this.onChange} />
           </div>
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Cấp bậc</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtLevel" value={txtLevel} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtLevel" value={txtLevel} onChange={this.onChange} />
           </div>
           <div className="form-group">
             <label >Vị trí</label>
-            <input type="text" className="form-control" id="" placeholder="Input field" name="txtPosition" value={txtPosition} onChange={this.onChange} />
+            <input type="text" required validations={[required]} className="form-control" id="" placeholder="Input field" name="txtPosition" value={txtPosition} onChange={this.onChange} />
           </div>
           <Link to='/staffsbuilding/list' className='btn btn-success'>Tro lai</Link>
           <button type="submit" className="btn btn-primary">Submit</button>

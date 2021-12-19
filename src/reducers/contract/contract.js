@@ -17,7 +17,7 @@ const allContract = (state = initialState, action) => {
   var contract = action.contract
   switch (action.type) {
     case Types.FETCH_CONTRACT:
-      state = action.allContract
+      state = action.contracts
       return [...state];
     case Types.DELETE_CONTRACT:
       index = findIndex(state, id)
@@ -28,6 +28,17 @@ const allContract = (state = initialState, action) => {
       return [...state];
     case Types.UPDATE_CONTRACT:
       index = findIndex(state, contract.id)
+      state[index] = contract
+      return [...state];
+    case Types.SORT_CONTRACT:
+      state = action.contracts
+      return [...state];
+    case Types.STATUS_CONTRACT:
+      state = action.contracts
+      return [...state];
+    case Types.PAY_CONTRACT:
+      //doan nay khong bi lap
+      index = findIndex(state, id)
       state[index] = contract
       return [...state];
     default: return [...state];
