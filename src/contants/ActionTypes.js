@@ -37,6 +37,7 @@ export const ADD_CONTRACT = ' ADD_CONTRACT '
 export const UPDATE_CONTRACT = 'UPDATE_CONTRACT'
 export const DELETE_CONTRACT = 'DELETE_CONTRACT'
 export const EDIT_CONTRACT = 'EDIT_CONTRACT'
+//login
 export const AUTH_REQ = "AUTH_REQUEST";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAILURE = "AUTH_FAILUE";
