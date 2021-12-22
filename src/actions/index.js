@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import * as Types from '../contants/ActionTypes';
 import callAPI from '../utils/callAPI';
+import axios from 'axios';
 export const actFetchAllCompanyRequest=()=>{
     return (dispatch)=>{
         return callAPI("GET", 'company', null).then(res=>{
@@ -479,3 +480,52 @@ export const pay =(contract)=>{
       contract
   }
 }
+
+
+//login
+export const authenticate=()=>{
+  return {
+      type:Types.AUTH_REQ
+  }
+}
+
+
+export const authSuccess= (content)=>{
+  localStorage.setItem('USER_KEY',content.token);
+  return {
+      type:Types.AUTH_SUCCESS,
+      payload:content
+  }
+}
+
+export const authFailure=(error)=>{
+  return {
+      type:Types.AUTH_FAILURE,
+      payload:error
+  }
+}
+
+
+//
+const getToken=()=>{
+  return localStorage.getItem('USER_KEY');
+}
+
+export const userLogin=(authRequest)=>{
+  return axios({
+      'method':'POST',
+      'url':`${process.env.hostUrl||'http://localhost:8080'}/api/v1/auth/login`,
+      'data':authRequest
+  })
+}
+
+export const fetchUserData=(authRequest)=>{
+  return axios({
+      method:'GET',
+      url:`${process.env.hostUrl||'http://localhost:8080'}/api/v1/auth/userinfo`,
+      headers:{
+          'Authorization':'Bearer '+getToken()
+      }
+  })
+}
+

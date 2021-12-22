@@ -1,6 +1,5 @@
-import React from 'react'
 import { CFooter } from '@coreui/react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 
 const AppFooter = () => {
   return (
