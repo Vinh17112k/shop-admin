@@ -160,20 +160,19 @@ export class CompanyActionPage extends Component {
             <label >Nhân viên</label>
             <input type="number" required className="form-control" id="" placeholder="Input field" name="numStaff" value={numStaff} validations={[required, number]} onChange={this.onChange} />
           </div>
-          <div className="form-group">
-            {/* value de do du lieu thanh cong */}
+          {/* <div className="form-group">
             <label >Phòng</label>
             <input type="text" required className="form-control" id="" placeholder="Input field" name="txtRoomNumber" value={txtRoomNumber} validations={[required]} onChange={this.onChange} />
-          </div>
+          </div> */}
           <div className="form-group">
             {/* value de do du lieu thanh cong */}
             <label >Điện thoại</label>
             <input type="text" required className="form-control" id="" placeholder="Input field" name="txtPhone" value={txtPhone} validations={[required]} onChange={this.onChange} />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label >Diện tích</label>
             <input type="number" required className="form-control" id="" placeholder="Input field" name="flArea" value={flArea} validations={[required, number]} onChange={this.onChange} />
-          </div>
+          </div> */}
           <Link to='/company/list' className='btn btn-success'>Tro lai</Link>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form >

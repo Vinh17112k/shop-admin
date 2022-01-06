@@ -16,11 +16,11 @@ export class ContractList extends Component {
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Mã hợp đồng</th>
+                <th>Mã</th>
                 <th>Tên người thuê</th>
                 <th>Tên Công ty</th>
                 <th>Tên phòng</th>
-                <th>Mô tả</th>
+                {/* <th>Mô tả</th> */}
                 <th>Diện tích</th>
                 <th>Giá thành</th>
                 <th>Ngày thuê</th>

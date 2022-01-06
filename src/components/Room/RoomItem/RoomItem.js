@@ -4,7 +4,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import CIcon from '@coreui/icons-react'
+import {
+  cilBell,
+  cilCalculator,
+  cilChartPie,
+  cilDrop,
+  cilNotes,
+  cilPencil,
+  cilRecycle,
+  cilPuzzle,
+  cilSpeedometer,
+  cilStar,
+} from '@coreui/icons'
 export class RoomItem extends Component {
   onDelete = (id) => {
     if (confirm("Ban chac chan muon xoa?")) //eslint-disable-line
@@ -37,10 +49,11 @@ export class RoomItem extends Component {
         <td>{roomItem.description}</td>
         <td>{roomItem.level}</td>
         <td>
-          <span>
-            <button className="btn btn-danger" onClick={()=>this.onDelete(roomItem.id)}>Xoa</button>
+        <span>
+            <button className="btn btn-danger" onClick={()=>this.onDelete(roomItem.id)}  style={{color: 'white'}}><CIcon icon={cilRecycle}  style={{color: '#000'}}/>Xóa</button>
+            &nbsp;
           </span>
-          <Link to={`/room/${roomItem.id}/edit`} className="btn btn-success">Sua</Link>
+          <Link to={`/room/${roomItem.id}/edit`} className="btn btn-success"  style={{color: 'white'}}><CIcon icon={cilPencil}  style={{color: '#000'}}/>Sửa</Link>
         </td>
       </tr>
     )

@@ -57,8 +57,8 @@ export class ContractActionPage extends Component {
       description: txtDescription,
       square: flSquare,
       costPerSquare: flCostPerSquare,
-      startDate: txtStartDate,
-      endDate: txtEndDate,
+      startDate: new Date(txtStartDate),
+      endDate: new Date(txtEndDate),
       totalCost: flSquare * flCostPerSquare,
       roomId: longRoomId,
       companyId: longCompanyId,
@@ -78,7 +78,7 @@ export class ContractActionPage extends Component {
         console.log("Ok");
         for (let i = 0; i < dataContract.length; i++) {
           console.log("dataContract", dataContract[i])
-          if (dataContract[i].company.id == contract.companyId)
+          if (dataContract[i].company.id == contract.companyId&&dataContract[i].room.id==contract.roomId)
             alert("Đã ký hợp đồng với công ty", dataContract[i].company.name)
           break;
         }
@@ -92,9 +92,10 @@ export class ContractActionPage extends Component {
   //sua
   componentDidMount() {
     console.log("componetDidMount: ");
-    var {contract, room}= this.props;
+    var { contract, room, itemEditting } = this.props;
     console.log("dataContract", contract);
     console.log("dataRoom", room);
+    console.log("dataEditting", itemEditting);
     var { match } = this.props;
     if (match) {
       var idParam = match.params.id;
@@ -102,28 +103,34 @@ export class ContractActionPage extends Component {
     }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log("itemEditting: ");
+    console.log("itemEditting: " + nextProps.itemEditting);
     if (nextProps && nextProps.itemEditting) {
       var { itemEditting } = nextProps;
-
+      console.log("id: " + itemEditting.id);
+      console.log("start: " + itemEditting.startDate);
+      console.log("end: " + itemEditting.endDate);
       this.setState({
         id: itemEditting.id,
-        txtTaxCode: itemEditting.taxCode,
         txtName: itemEditting.name,
-        flCharterCapital: itemEditting.charterCapital,
-        txtBusinessAreas: itemEditting.businessAreas,
-        numStaff: itemEditting.numberStaff,
-        txtRoomNumber: itemEditting.roomNumber,
-        txtPhone: itemEditting.phone,
-        flArea: itemEditting.area
+        txtDescription: itemEditting.description,
+        flSquare: itemEditting.square,
+        flCostPerSquare: itemEditting.costPerSquare,
+        txtStartDate: itemEditting.startDate,
+        txtEndDate: itemEditting.endDate,
+        longRoomId: itemEditting.roomId,
+        longCompanyId: itemEditting.companyId
       })
     }
   }
   getRoomSquare(dataRoom, roomId) {
     var result = null;
     for (let i = 0; i < dataRoom.length; i++) {
-      if (dataRoom[i].id == roomId)
-        result = dataRoom[i].restSquare;
+      if (dataRoom[i].id == roomId) {
+        console.log("idRoom: ",roomId);
+        console.log("resquare: ",dataRoom[i].restSquare);
+        console.log("resquare: ",dataRoom[i]);
+        result = dataRoom[i].square;
+      }
     }
     return result;
   }
@@ -204,7 +211,7 @@ export class ContractActionPage extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    itemEditting: state.itemEditting,
+    itemEditting: state.contractEditting,
     company: state.allCompany,
     contract: state.allContract,
     room: state.allRoom

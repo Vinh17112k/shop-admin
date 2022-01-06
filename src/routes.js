@@ -1,4 +1,5 @@
 import React from 'react'
+import CompanyInfo from './components/Company/CompanyItem/CompanyInfo'
 import CompanyActionPage from './pages/CompanyActionPage/CompanyActionPage'
 import CompanyListPage from './pages/CompanyListPage/CompanyListPage'
 import ContractActionPage from './pages/ContractActionPage/ContractActionPage'
@@ -80,6 +81,11 @@ const routes = [
     name: 'Popovers',
     component: ({ match, history }) => <CompanyActionPage match={match} history={history} />,
   },
+  {
+    path: '/company/:id/info',
+    name: 'Popovers',
+    component: ({ match, history }) => <CompanyInfo match={match} history={history} />,
+  },
   // eslint-disable-next-line prettier/prettier
   { path: '/staffs/add', name: 'Thêm nhân viên', component:({history})=><StaffActionPage history={history} /> },
   {
@@ -110,6 +116,11 @@ const routes = [
   },
   // eslint-disable-next-line prettier/prettier
   { path: '/contract/add', name: 'Thêm hợp đồng', component:({history})=><ContractActionPage history={history} /> },
+  {
+    path: '/contract/:id/edit',
+    name: 'Popovers',
+    component: ({ match, history }) => <ContractActionPage match={match} history={history} />,
+  },
   { path: '/company/progress', name: 'Progress', component: Progress },
   { path: '/company/spinners', name: 'Spinners', component: Spinners },
   { path: '/company/tables', name: 'Tables', component: Tables },

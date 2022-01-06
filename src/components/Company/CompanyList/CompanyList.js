@@ -22,8 +22,8 @@ export class CompanyList extends Component {
                 <th>vốn điều lệ</th>
                 <th>Lĩnh vực</th>
                 <th>Số nhân viên</th>
-                <th>Phòng</th>
-                <th>Diện tích</th>
+                {/* <th>Phòng</th> */}
+                {/* <th>Diện tích</th> */}
                 <th>Số điện thoại</th>
                 <th>Hành động</th>
               </tr>
