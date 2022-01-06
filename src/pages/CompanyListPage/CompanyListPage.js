@@ -29,7 +29,7 @@ export class CompanyListPage extends Component {
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div className='row d-flex justify-content-between'>
           <Link to="/company/add" className="btn btn-info col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
-            <CIcon icon={cilPlus}/> Thêm hợp đồng
+            <CIcon icon={cilPlus}/> Thêm công ty
           </Link>
           <Search />
         </div>

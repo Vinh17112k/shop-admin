@@ -12,6 +12,7 @@ import {
   cilNotes,
   cilPencil,
   cilRecycle,
+  cilInfo,
   cilPuzzle,
   cilSpeedometer,
   cilStar,
@@ -34,14 +35,16 @@ export class CompanyItem extends Component {
         <td>{companyItem.charterCapital}</td>
         <td>{companyItem.businessAreas}</td>
         <td>{companyItem.numberStaff}</td>
-        <td>{companyItem.roomNumber}</td>
+        {/* <td>{companyItem.roomNumber}</td> */}
         <td>{companyItem.phone}</td>
-        <td>{companyItem.area}</td>
+        {/* <td>{companyItem.area}</td> */}
         <td>
           <span>
-            <button className="btn btn-danger" onClick={()=>this.onDelete(companyItem.id)}  style={{color: 'white'}}><CIcon icon={cilRecycle}  style={{color: '#000'}}/>Xóa</button>
+            <button className="btn btn-danger" onClick={() => this.onDelete(companyItem.id)} style={{ color: 'white' }}><CIcon icon={cilRecycle} style={{ color: '#000' }} />Xóa</button>
+            &nbsp;
           </span>
-          <Link to={`/company/${companyItem.id}/edit`} className="btn btn-success"  style={{color: 'white'}}><CIcon icon={cilPencil}  style={{color: '#000'}}/>Sửa</Link>
+          <Link to={`/company/${companyItem.id}/edit`} className="btn btn-success" style={{ color: 'white' }}><CIcon icon={cilPencil} style={{ color: '#000' }} />Sửa</Link>&nbsp;
+          <Link to={`/company/${companyItem.id}/info`} className="btn btn-info" style={{ color: 'white' }}><CIcon icon={cilInfo} style={{ color: '#000' }} />Chi tiết</Link>
         </td>
       </tr>
     )

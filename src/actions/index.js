@@ -519,13 +519,13 @@ export const userLogin=(authRequest)=>{
   })
 }
 
-export const fetchUserData=(authRequest)=>{
-  return axios({
-      method:'GET',
-      url:`${process.env.hostUrl||'http://localhost:8080'}/api/v1/auth/userinfo`,
-      headers:{
-          'Authorization':'Bearer '+getToken()
-      }
-  })
-}
+// export const fetchUserData=(authRequest)=>{
+//   return axios({
+//       method:'GET',
+//       url:`${process.env.hostUrl||'http://localhost:8080'}/api/v1/auth/userinfo`,
+//       headers:{
+//           'Authorization':'Bearer '+getToken()
+//       }
+//   })
+// }
 

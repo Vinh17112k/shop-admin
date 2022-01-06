@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import {
-  cilSearch
+  cilSearch,
+  cilSortDescending,
+  cilFilter
 } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import React, { Component } from 'react';
@@ -51,10 +53,10 @@ class TaskSearchControl extends Component {
           </span>
         </div>
         <span className="input-group-btn">
-            <button className="btn btn-success" type="button" onClick={this.onSort}>
+            <button className="btn btn-success" type="button" onClick={this.onSort}> <CIcon icon={cilSortDescending} />
               Sắp xếp
             </button>
-            <button className="btn btn-danger" type="button" onClick={this.onStatus}>
+            <button className="btn btn-danger" type="button" onClick={this.onStatus}> <CIcon icon={cilFilter} />
               Lọc trạng thái
             </button>
           </span>
