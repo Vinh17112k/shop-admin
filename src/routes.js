@@ -1,17 +1,9 @@
 import React from 'react'
-import CompanyInfo from './components/Company/CompanyItem/CompanyInfo'
-import CompanyActionPage from './pages/CompanyActionPage/CompanyActionPage'
-import CompanyListPage from './pages/CompanyListPage/CompanyListPage'
-import ContractActionPage from './pages/ContractActionPage/ContractActionPage'
-import ContractListPage from './pages/ContractListPage/ContractListPage'
-import RoomActionPage from './pages/RoomActionPage/RoomActionPage'
-import RoomListPage from './pages/RoomListPage/RoomListPage'
-import ServiceActionPage from './pages/ServiceActionPage/ServiceActionPage'
-import ServiceListPage from './pages/ServiceListPage/ServiceListPage'
-import StaffActionPage from './pages/StaffActionPage/StaffActionPage'
-import StaffBuildingActionPage from './pages/StaffBuildingActionPage/StaffBuildingActionPage'
-import StaffBuildingListPage from './pages/StaffBuildingListPage/StaffBuildingListPage'
-import StaffListPage from './pages/StaffListPage/StaffListPage'
+import ProductInfo from './components/Product/ProductItem/ProductInfo'
+import CategoryActionPage from './pages/CategoryActionPage/CategoryActionPage'
+import CategoryListPage from './pages/CategoryListPage/CategoryListPage'
+import ProductActionPage from './pages/ProductActionPage/ProductActionPage'
+import ProductListPage from './pages/ProductListPage/ProductListPage'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -56,75 +48,40 @@ const routes = [
   { path: '/theme', name: 'Tổng quan', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Giới thiệu', component: Colors },
   { path: '/theme/typography', name: 'Thông tin liên hệ', component: Typography },
-  { path: '/company/list', name: 'Danh sách công ty', component: CompanyListPage },
-  { path: '/staffs/list', name: 'Danh sách nhân viên', component: StaffListPage },
-  { path: '/services/list', name: 'Danh sách dịch vụ', component: ServiceListPage },
-  {
-    path: '/staffsbuilding/list',
-    name: 'Danh sách nhân viên tòa nhà',
-    component: StaffBuildingListPage,
-  },
-  {
-    path: '/contract/list',
-    name: 'Danh sách hợp đồng',
-    component: ContractListPage,
-  },
-  {
-    path: '/room/list',
-    name: 'Danh sách phòng',
-    component: RoomListPage,
-  },
+  { path: '/product/list', name: 'Danh sách sản phẩm', component: ProductListPage },
+  { path: '/category/list', name: 'Danh sách danh mục', component: CategoryListPage },
   // eslint-disable-next-line prettier/prettier
-  { path: '/company/add', name: 'Thêm công ty', component:({history})=><CompanyActionPage history={history} /> },
+  { path: '/product/add', name: 'Thêm công ty', component:({history})=><ProductActionPage history={history} /> },
   {
-    path: '/company/:id/edit',
+    path: '/product/:id/edit',
     name: 'Popovers',
-    component: ({ match, history }) => <CompanyActionPage match={match} history={history} />,
+    component: ({ match, history }) => <ProductActionPage match={match} history={history} />,
   },
   {
-    path: '/company/:id/info',
+    path: '/product/:id/info',
     name: 'Popovers',
-    component: ({ match, history }) => <CompanyInfo match={match} history={history} />,
+    component: ({ match, history }) => <ProductInfo match={match} history={history} />,
   },
+  {
+    path: '/category/add',
+    name: 'Thêm danh mục',
+    component: ({ history }) => <CategoryActionPage history={history} />,
+  },
+  {
+    path: '/category/:id/edit',
+    name: 'Popovers',
+    component: ({ match, history }) => <CategoryActionPage match={match} history={history} />,
+  },
+  // {
+  //   path: '/category/:id/info',
+  //   name: 'Popovers',
+  //   component: ({ match, history }) => <CategoryInfo match={match} history={history} />,
+  // },
   // eslint-disable-next-line prettier/prettier
-  { path: '/staffs/add', name: 'Thêm nhân viên', component:({history})=><StaffActionPage history={history} /> },
-  {
-    path: '/staffs/:id/edit',
-    name: 'Popovers',
-    component: ({ match, history }) => <StaffActionPage match={match} history={history} />,
-  },
-  // eslint-disable-next-line prettier/prettier
-  { path: '/services/add', name: 'Thêm dịch vụ', component:({history})=><ServiceActionPage history={history} /> },
-  {
-    path: '/services/:id/edit',
-    name: 'Popovers',
-    component: ({ match, history }) => <ServiceActionPage match={match} history={history} />,
-  },
-  // eslint-disable-next-line prettier/prettier
-  { path: '/staffsbuilding/add', name: 'Thêm nhân viên tòa nhà', component:({history})=><StaffBuildingActionPage history={history} /> },
-  {
-    path: '/staffsbuilding/:id/edit',
-    name: 'Popovers',
-    component: ({ match, history }) => <StaffBuildingActionPage match={match} history={history} />,
-  },
-  // eslint-disable-next-line prettier/prettier
-  { path: '/room/add', name: 'Thêm phòng', component:({history})=><RoomActionPage history={history} /> },
-  {
-    path: '/room/:id/edit',
-    name: 'Popovers',
-    component: ({ match, history }) => <RoomActionPage match={match} history={history} />,
-  },
-  // eslint-disable-next-line prettier/prettier
-  { path: '/contract/add', name: 'Thêm hợp đồng', component:({history})=><ContractActionPage history={history} /> },
-  {
-    path: '/contract/:id/edit',
-    name: 'Popovers',
-    component: ({ match, history }) => <ContractActionPage match={match} history={history} />,
-  },
-  { path: '/company/progress', name: 'Progress', component: Progress },
-  { path: '/company/spinners', name: 'Spinners', component: Spinners },
-  { path: '/company/tables', name: 'Tables', component: Tables },
-  { path: '/company/tooltips', name: 'Tooltips', component: Tooltips },
+  { path: '/product/progress', name: 'Progress', component: Progress },
+  { path: '/product/spinners', name: 'Spinners', component: Spinners },
+  { path: '/product/tables', name: 'Tables', component: Tables },
+  { path: '/product/tooltips', name: 'Tooltips', component: Tooltips },
   { path: '/charts', name: 'Điện nước', component: Charts },
   { path: '/forms', name: 'Điện', component: FormControl, exact: true },
   { path: '/forms/form-control', name: 'Nước', component: FormControl },

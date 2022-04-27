@@ -1,56 +1,21 @@
-/* eslint-disable prettier/prettier */
-export const FETCH_COMPANY = ' FETCH_COMPANY '
-export const ADD_COMPANY = ' ADD_COMPANY '
-export const UPDATE_COMPANY = 'UPDATE_COMPANY'
-export const DELETE_COMPANY = 'DELETE_COMPANY'
-export const EDIT_COMPANY = 'EDIT_COMPANY'
-
-//staff
-export const FETCH_STAFF = ' FETCH_STAFF '
-export const ADD_STAFF = ' ADD_STAFF '
-export const UPDATE_STAFF = 'UPDATE_STAFF'
-//khong hieu sao khong co bug
-// export const DELETE_STAFF = 'DELETE_COMPANYSTAFF'
-export const DELETE_STAFF = 'DELETE_STAFF'
-export const EDIT_STAFF = 'EDIT_STAFF'
-
-//service
-export const FETCH_SERVICE = ' FETCH_SERVICE '
-export const ADD_SERVICE = ' ADD_SERVICE '
-export const UPDATE_SERVICE = 'UPDATE_SERVICE'
-export const DELETE_SERVICE = 'DELETE_SERVICE'
-export const EDIT_SERVICE = 'EDIT_SERVICE'
-
-
-//staffBuidling
-export const FETCH_STAFFBUILDING = ' FETCH_STAFFBUILDING '
-export const ADD_STAFFBUILDING = ' ADD_STAFFBUILDING '
-export const UPDATE_STAFFBUILDING = 'UPDATE_STAFFBUILDING'
-export const DELETE_STAFFBUILDING = 'DELETE_STAFFBUILDING'
-export const EDIT_STAFFBUILDING = 'EDIT_STAFFBUILDING'
-
-
-//contract
-
-export const FETCH_CONTRACT = ' FETCH_CONTRACT '
-export const ADD_CONTRACT = ' ADD_CONTRACT '
-export const UPDATE_CONTRACT = 'UPDATE_CONTRACT'
-export const DELETE_CONTRACT = 'DELETE_CONTRACT'
-export const EDIT_CONTRACT = 'EDIT_CONTRACT'
+//product
+export const FETCH_PRODUCT = ' FETCH_PRODUCT '
+export const ADD_PRODUCT = ' ADD_PRODUCT '
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
+export const EDIT_PRODUCT = 'EDIT_PRODUCT'
+//category
+export const FETCH_CATEGORY = ' FETCH_CATEGORY '
+export const ADD_CATEGORY = ' ADD_CATEGORY '
+export const UPDATE_CATEGORY = 'UPDATE_CATEGORY'
+export const DELETE_CATEGORY = 'DELETE_CATEGORY'
+export const EDIT_CATEGORY = 'EDIT_CATEGORY'
 //login
-export const AUTH_REQ = "AUTH_REQUEST";
-export const AUTH_SUCCESS = "AUTH_SUCCESS";
-export const AUTH_FAILURE = "AUTH_FAILUE";
-
-//room
-export const FETCH_ROOM = ' FETCH_ROOM '
-export const ADD_ROOM = ' ADD_ROOM '
-export const UPDATE_ROOM = 'UPDATE_ROOM'
-export const DELETE_ROOM = 'DELETE_ROOM'
-export const EDIT_ROOM = 'EDIT_ROOM'
-
+export const AUTH_REQ = 'AUTH_REQUEST'
+export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+export const AUTH_FAILURE = 'AUTH_FAILUE'
 //search
-export const SEARCH = 'SEARCH';
-export const SORT_CONTRACT = 'SORT_CONTRACT';
-export const STATUS_CONTRACT = 'STATUS_CONTRACT';
-export const PAY_CONTRACT = 'PAY_CONTRACT';
+export const SEARCH = 'SEARCH'
+export const SORT_CONTRACT = 'SORT_CONTRACT'
+export const STATUS_CONTRACT = 'STATUS_CONTRACT'
+export const PAY_CONTRACT = 'PAY_CONTRACT'

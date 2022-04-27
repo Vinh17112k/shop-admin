@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react'
 
-export class StaffList extends Component {
+export class CategoryList extends Component {
   render() {
     return (
       <div>
@@ -31,4 +31,4 @@ export class StaffList extends Component {
   }
 }
 
-export default StaffList
+export default CategoryList

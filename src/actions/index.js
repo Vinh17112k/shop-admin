@@ -2,433 +2,142 @@
 import * as Types from '../contants/ActionTypes';
 import callAPI from '../utils/callAPI';
 import axios from 'axios';
-export const actFetchAllCompanyRequest=()=>{
-    return (dispatch)=>{
-        return callAPI("GET", 'company', null).then(res=>{
-            dispatch(actFetchAllCompany(res.data));
-        })
-    }
-}
-export const actFetchAllCompany =(allCompany)=>{
-    return {
-        type: Types.FETCH_COMPANY,
-        allCompany
-    }
-}
-//xoa tren server roi moi xoa tren store
-export const actDeleteCompanyRequest=(id)=>{
-    return (dispatch)=>{
-        return callAPI("DELETE", `company/${id}`, null).then(res=>{
-            dispatch(actDeleteCompany(id));
-        })
-    }
-}
-export const actDeleteCompany=(id)=>{
-    return {
-        type: Types.DELETE_COMPANY,
-        id
-    }
-}
-//them cong ty
-export const actAddCompanyRequest=(company)=>{
-    return (dispatch)=>{
-        return callAPI("POST", 'company', company).then(res=>{
-            dispatch(actAddCompany(res.data));
-        })
-    }
-}
-export const actAddCompany=(company)=>{
-    return {
-        type: Types.ADD_COMPANY,
-        company
-    }
-}
-export const actEditCompanyRequest=(id)=>{
-    return (dispatch)=>{
-        return callAPI("GET", `company/${id}`,null).then(res=>{
-            dispatch(actEditCompany(res.data));
-        })
-    }
-}
-export const actEditCompany=(company)=>{
-    return {
-        type: Types.EDIT_COMPANY,
-        company
-    }
-}
-export const actUpdateCompanyRequest=(company)=>{
-    return (dispatch)=>{
-        return callAPI("PUT", `company/${company.id}`,company).then(res=>{
-            dispatch(actUpdateCompany(res.data));
-        })
-    }
-}
-export const actUpdateCompany=(company)=>{
-    return {
-        type: Types.UPDATE_COMPANY,
-        company
-    }
-}
-
-
-
-//staffs
-//fetchStaff
-export const actFetchStaffsRequest=()=>{
+import { axiosAuthen } from 'src/utils/axiosAuthen';
+//product
+export const actFetchAllProductRequest=()=>{
   return (dispatch)=>{
-      return callAPI("GET", 'staffs', null).then(res=>{
-          dispatch(actFetchStaffs(res.data));
+      return axiosAuthen.get('api/product/getAll', null).then(res=>{
+          dispatch(actFetchAllProduct(res.data));
       })
   }
 }
-export const actFetchStaffs =(staffs)=>{
+export const actFetchAllProduct =(allProduct)=>{
   return {
-      type: Types.FETCH_STAFF,
-      staffs
-  }
-}
-//deleteStaff
-export const actDeleteStaffRequest=(id)=>{
-  return (dispatch)=>{
-      return callAPI("DELETE", `staffs/${id}`, null).then(res=>{
-          dispatch(actDeleteStaff(id));
-      })
-  }
-}
-export const actDeleteStaff=(id)=>{
-  return {
-      type: Types.DELETE_STAFF,
-      id
-  }
-}
-//addStaff
-export const actAddStaffRequest=(staff)=>{
-  return (dispatch)=>{
-      return callAPI("POST", 'staffs', staff).then(res=>{
-          dispatch(actAddStaff(res.data));
-      })
-  }
-}
-export const actAddStaff=(staff)=>{
-  return {
-      type: Types.ADD_STAFF,
-      staff
-  }
-}
-//editStaff
-export const actEditStaffRequest=(id)=>{
-  return (dispatch)=>{
-      return callAPI("GET", `staffs/${id}`,null).then(res=>{
-          dispatch(actEditStaff(res.data));
-      })
-  }
-}
-export const actEditStaff=(staff)=>{
-  return {
-      type: Types.EDIT_STAFF,
-      staff
-  }
-}
-//upDateStaff
-export const actUpdateStaffRequest=(staff)=>{
-  return (dispatch)=>{
-      return callAPI("PUT", `staffs/${staff.id}`,staff).then(res=>{
-          dispatch(actUpdateStaff(res.data));
-      })
-  }
-}
-export const actUpdateStaff=(staff)=>{
-  return {
-      type: Types.UPDATE_STAFF,
-      staff
-  }
-}
-
-//services
-//fetchService
-export const actFetchServicesRequest=()=>{
-  return (dispatch)=>{
-      return callAPI("GET", 'service/list', null).then(res=>{
-          dispatch(actFetchServices(res.data));
-      })
-  }
-}
-export const actFetchServices =(services)=>{
-  return {
-      type: Types.FETCH_SERVICE,
-      services
-  }
-}
-//deleteService
-export const actDeleteServiceRequest=(id)=>{
-  return (dispatch)=>{
-      return callAPI("DELETE", `service/delete/${id}`, null).then(res=>{
-          dispatch(actDeleteService(id));
-      })
-  }
-}
-export const actDeleteService=(id)=>{
-  return {
-      type: Types.DELETE_SERVICE,
-      id
-  }
-}
-//addService
-export const actAddServiceRequest=(service)=>{
-  return (dispatch)=>{
-      return callAPI("POST", 'service', service).then(res=>{
-          dispatch(actAddService(res.data));
-      })
-  }
-}
-export const actAddService=(service)=>{
-  return {
-      type: Types.ADD_SERVICE,
-      service
-  }
-}
-//editService
-export const actEditServiceRequest=(id)=>{
-  return (dispatch)=>{
-      return callAPI("GET", `service/${id}`,null).then(res=>{
-          dispatch(actEditService(res.data));
-      })
-  }
-}
-export const actEditService=(service)=>{
-  return {
-      type: Types.EDIT_SERVICE,
-      service
-  }
-}
-//upDateService
-export const actUpdateServiceRequest=(service)=>{
-  return (dispatch)=>{
-      return callAPI("PUT", `service/${service.id}`,service).then(res=>{
-          dispatch(actUpdateService(res.data));
-      })
-  }
-}
-export const actUpdateService=(service)=>{
-  return {
-      type: Types.UPDATE_SERVICE,
-      service
-  }
-}
-
-
-//staffBuilding
-//fetchStaffBuilding
-export const actFetchStaffsBuildingRequest=()=>{
-  return (dispatch)=>{
-      return callAPI("GET", 'staffsbuilding', null).then(res=>{
-          dispatch(actFetchStaffsBuilding(res.data));
-      })
-  }
-}
-export const actFetchStaffsBuilding =(staffsbuilding)=>{
-  return {
-      type: Types.FETCH_STAFFBUILDING,
-      staffsbuilding
-  }
-}
-//deleteStaff
-export const actDeleteStaffBuildingRequest=(id)=>{
-  return (dispatch)=>{
-      return callAPI("DELETE", `staffsbuilding/${id}`, null).then(res=>{
-          dispatch(actDeleteStaffBuilding(id));
-      })
-  }
-}
-export const actDeleteStaffBuilding=(id)=>{
-  return {
-      type: Types.DELETE_STAFFBUILDING,
-      id
-  }
-}
-//addStaff
-export const actAddStaffBuildingRequest=(staffBuilding)=>{
-  return (dispatch)=>{
-      return callAPI("POST", 'staffsbuilding/create', staffBuilding).then(res=>{
-          dispatch(actAddStaffBuilding(res.data));
-      })
-  }
-}
-export const actAddStaffBuilding=(staffBuilding)=>{
-  return {
-      type: Types.ADD_STAFFBUILDING,
-      staffBuilding
-  }
-}
-//editStaff
-export const actEditStaffBuildingRequest=(id)=>{
-  return (dispatch)=>{
-      return callAPI("GET", `staffsbuilding/${id}`,null).then(res=>{
-          dispatch(actEditStaffBuilding(res.data));
-      })
-  }
-}
-export const actEditStaffBuilding=(staffBuilding)=>{
-  return {
-      type: Types.EDIT_STAFFBUILDING,
-      staffBuilding
-  }
-}
-//upDateStaff
-export const actUpdateStaffBuildingRequest=(staff)=>{
-  return (dispatch)=>{
-      return callAPI("PUT", `staffsbuilding/update/${staff.id}`,staff).then(res=>{
-          dispatch(actUpdateStaffBuilding(res.data));
-      })
-  }
-}
-export const actUpdateStaffBuilding=(staffBuilding)=>{
-  return {
-      type: Types.UPDATE_STAFFBUILDING,
-      staffBuilding
-  }
-}
-
-
-//fetch contract
-export const actFetchAllContractRequest=()=>{
-  return (dispatch)=>{
-      return callAPI("GET", 'contract', null).then(res=>{
-          dispatch(actFetchContracts(res.data));
-      })
-  }
-}
-export const actFetchContracts =(contracts)=>{
-  return {
-      type: Types.FETCH_CONTRACT,
-      contracts
-  }
-}
-//delete contract
-export const actDeleteContractRequest=(id)=>{
-  return (dispatch)=>{
-      return callAPI("DELETE", `contract/${id}`, null).then(res=>{
-          dispatch(actDeleteContract(id));
-      })
-  }
-}
-export const actDeleteContract=(id)=>{
-  return {
-      type: Types.DELETE_CONTRACT,
-      id
-  }
-}
-//add contract
-export const actAddContractRequest=(contract)=>{
-  return (dispatch)=>{
-      return callAPI("POST", 'contract', contract).then(res=>{
-          dispatch(actAddContract(res.data));
-      })
-  }
-}
-export const actAddContract=(contract)=>{
-  return {
-      type: Types.ADD_CONTRACT,
-      contract
-  }
-}
-//editContract
-export const actEditContractRequest=(id)=>{
-  return (dispatch)=>{
-      return callAPI("GET", `contract/${id}`,null).then(res=>{
-          dispatch(actEditContract(res.data));
-      })
-  }
-}
-export const actEditContract=(contract)=>{
-  return {
-      type: Types.EDIT_CONTRACT,
-      contract
-  }
-}
-//upDateContract
-export const actUpdateContractRequest=(contract)=>{
-  return (dispatch)=>{
-      return callAPI("PUT", `contract/${contract.id}`,contract).then(res=>{
-          dispatch(actUpdateContract(res.data));
-      })
-  }
-}
-export const actUpdateContract=(contract)=>{
-  return {
-      type: Types.UPDATE_CONTRACT,
-      contract
-  }
-}
-
-
-
-//room
-export const actFetchAllRoomRequest=()=>{
-  return (dispatch)=>{
-      return callAPI("GET", 'room', null).then(res=>{
-          dispatch(actFetchAllRoom(res.data));
-      })
-  }
-}
-export const actFetchAllRoom =(allRoom)=>{
-  return {
-      type: Types.FETCH_ROOM,
-      allRoom
+      type: Types.FETCH_PRODUCT,
+      allProduct
   }
 }
 //xoa tren server roi moi xoa tren store
-export const actDeleteRoomRequest=(id)=>{
+export const actDeleteProductRequest=(id)=>{
   return (dispatch)=>{
-      return callAPI("DELETE", `room/${id}`, null).then(res=>{
-          dispatch(actDeleteRoom(id));
+      return axiosAuthen.delete(`api/product/delete/${id}`, null).then(res=>{
+          dispatch(actDeleteProduct(id));
       })
   }
 }
-export const actDeleteRoom=(id)=>{
+export const actDeleteProduct=(id)=>{
   return {
-      type: Types.DELETE_ROOM,
+      type: Types.DELETE_PRODUCT,
       id
   }
 }
 //them cong ty
-export const actAddRoomRequest=(room)=>{
+export const actAddProductRequest=(product)=>{
   return (dispatch)=>{
-      return callAPI("POST", 'room', room).then(res=>{
-          dispatch(actAddRoom(res.data));
+      return axiosAuthen.post('api/product/create', product).then(res=>{
+          dispatch(actAddProduct(res.data));
       })
   }
 }
-export const actAddRoom=(room)=>{
+export const actAddProduct=(product)=>{
   return {
-      type: Types.ADD_ROOM,
-      room
+      type: Types.ADD_PRODUCT,
+      product
   }
 }
-export const actEditRoomRequest=(id)=>{
+export const actEditProductRequest=(id)=>{
   return (dispatch)=>{
-      return callAPI("GET", `room/${id}`,null).then(res=>{
-          dispatch(actEditRoom(res.data));
+      return axiosAuthen.get(`api/product/${id}`,null).then(res=>{
+          dispatch(actEditProduct(res.data));
       })
   }
 }
-export const actEditRoom=(room)=>{
+export const actEditProduct=(product)=>{
   return {
-      type: Types.EDIT_ROOM,
-      room
+      type: Types.EDIT_PRODUCT,
+      product
   }
 }
-export const actUpdateRoomRequest=(room)=>{
+export const actUpdateProductRequest=(product)=>{
   return (dispatch)=>{
-      return callAPI("PUT", `room/${room.id}`,room).then(res=>{
-          dispatch(actUpdateRoom(res.data));
+      return axiosAuthen.put(`api/product/update/${product.id}`,product).then(res=>{
+          dispatch(actUpdateProduct(res.data));
       })
   }
 }
-export const actUpdateRoom=(room)=>{
+export const actUpdateProduct=(product)=>{
   return {
-      type: Types.UPDATE_ROOM,
-      room
+      type: Types.UPDATE_PRODUCT,
+      product
+  }
+}
+//category
+
+export const actFetchAllCategoryRequest=()=>{
+  return (dispatch)=>{
+      return axiosAuthen.get('api/admin/category/getAll', null).then(res=>{
+          dispatch(actFetchAllCategory(res.data));
+      })
+  }
+}
+export const actFetchAllCategory =(allCategory)=>{
+  return {
+      type: Types.FETCH_CATEGORY,
+      allCategory
+  }
+}
+//xoa tren server roi moi xoa tren store
+export const actDeleteCategoryRequest=(id)=>{
+  return (dispatch)=>{
+      return axiosAuthen.delete(`api/admin/category/delete/${id}`, null).then(res=>{
+          dispatch(actDeleteCategory(id));
+      })
+  }
+}
+export const actDeleteCategory=(id)=>{
+  return {
+      type: Types.DELETE_CATEGORY,
+      id
+  }
+}
+//them danh muc
+export const actAddCategoryRequest=(category)=>{
+  return (dispatch)=>{
+      return axiosAuthen.post('api/admin/category/create', category).then(res=>{
+          dispatch(actAddCategory(res.data));
+      })
+  }
+}
+export const actAddCategory=(category)=>{
+  return {
+      type: Types.ADD_CATEGORY,
+      category
+  }
+}
+export const actEditCategoryRequest=(id)=>{
+  return (dispatch)=>{
+      return axiosAuthen.get(`api/admin/category/${id}`,null).then(res=>{
+          dispatch(actEditCategory(res.data));
+      })
+  }
+}
+export const actEditCategory=(category)=>{
+  return {
+      type: Types.EDIT_CATEGORY,
+      category
+  }
+}
+export const actUpdateCategoryRequest=(category)=>{
+  return (dispatch)=>{
+      return axiosAuthen.put(`api/category/update/${category.id}`,category).then(res=>{
+          dispatch(actUpdateCategory(res.data));
+      })
+  }
+}
+export const actUpdateCategory=(category)=>{
+  return {
+      type: Types.UPDATE_CATEGORY,
+      category
   }
 }
 //search
@@ -452,36 +161,6 @@ export const sort =(contracts)=>{
       contracts
   }
 }
-//contract status pay
-export const actFetchContractStatus=()=>{
-  return (dispatch)=>{
-      return callAPI("GET", 'contract/findStatus', null).then(res=>{
-          dispatch(status(res.data));
-      })
-  }
-}
-export const status =(contracts)=>{
-  return {
-      type: Types.STATUS_CONTRACT,
-      contracts
-  }
-}
-//company pay contract
-export const actFetchContractPay=(id)=>{
-  return (dispatch)=>{
-      return callAPI("GET", `contract/pay/${id}`, null).then(res=>{
-          dispatch(pay(res.data));
-      })
-  }
-}
-export const pay =(contract)=>{
-  return {
-      type: Types.PAY_CONTRACT,
-      contract
-  }
-}
-
-
 //login
 export const authenticate=()=>{
   return {
@@ -514,11 +193,19 @@ const getToken=()=>{
 export const userLogin=(authRequest)=>{
   return axios({
       'method':'POST',
-      'url':`${process.env.hostUrl||'http://localhost:8080'}/api/v1/auth/login`,
+      'url':`${process.env.hostUrl||'http://localhost:8080'}/api/login/user`,
       'data':authRequest
   })
 }
+// export const axiosClient = axios.create({
+//   baseURL: 'http://localhost:8080',
+// })
 
+// // config request headers
+// axiosClient.interceptors.request.use(config => {
+//   config.headers.common['Authorization'] = 'Bearer ' + `${getToken() ? getToken() : ''}`;
+//   return config;
+// });
 // export const fetchUserData=(authRequest)=>{
 //   return axios({
 //       method:'GET',

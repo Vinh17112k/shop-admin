@@ -51,127 +51,13 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Danh sách công ty',
-        to: '/company/list',
+        name: 'Danh sách sản  phẩm',
+        to: '/product/list',
       },
       {
         component: CNavItem,
-        name: 'Danh sách nhân viên',
-        to: '/staffs/list',
-      },
-      {
-        component: CNavItem,
-        name: 'Danh sách dịch vụ',
-        to: '/services/list',
-      },
-      {
-        component: CNavItem,
-        name: 'Danh sách nhân viên tòa nhà',
-        to: '/staffsbuilding/list',
-      },
-      {
-        component: CNavItem,
-        name: 'Danh sách hợp đồng',
-        to: '/contract/list',
-      },
-      {
-        component: CNavItem,
-        name: 'Danh sách phòng',
-        to: '/room/list',
-      },
-      {
-        component: CNavItem,
-        name: 'Spinners',
-        to: '/company/spinners',
-      },
-      {
-        component: CNavItem,
-        name: 'Tables',
-        to: '/company/tables',
-      },
-      {
-        component: CNavItem,
-        name: 'Tooltips',
-        to: '/company/tooltips',
-      },
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Điện Nước',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Điện',
-        to: '/forms/form-control',
-      },
-      {
-        component: CNavItem,
-        name: 'Nước',
-        to: '/forms/select',
-      },
-      {
-        component: CNavItem,
-        name: 'Checks & Radios',
-        to: '/forms/checks-radios',
-      },
-      {
-        component: CNavItem,
-        name: 'Range',
-        to: '/forms/range',
-      },
-      {
-        component: CNavItem,
-        name: 'Input Group',
-        to: '/forms/input-group',
-      },
-      {
-        component: CNavItem,
-        name: 'Floating Labels',
-        to: '/forms/floating-labels',
-      },
-      {
-        component: CNavItem,
-        name: 'Layout',
-        to: '/forms/layout',
-      },
-      {
-        component: CNavItem,
-        name: 'Validation',
-        to: '/forms/validation',
-      },
-    ],
-  },
-  {
-    component: CNavItem,
-    name: 'Hóa đơn',
-    to: '/charts',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavGroup,
-    name: 'Icons',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'CoreUI Free',
-        to: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'NEW',
-        },
-      },
-      {
-        component: CNavItem,
-        name: 'CoreUI Flags',
-        to: '/icons/flags',
-      },
-      {
-        component: CNavItem,
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
+        name: 'Danh sách danh mục',
+        to: '/category/list',
       },
     ],
   },

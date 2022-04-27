@@ -2,13 +2,13 @@
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react'
 
-export class StaffList extends Component {
+export class ProductList extends Component {
   render() {
     return (
       <div>
         <div className="panel panel-primary">
           <div className="panel-heading">
-            <h3 className="panel-title">Danh sách danh mục</h3>
+            <h3 className="panel-title">Danh sách công ty</h3>
           </div>
         </div>
         <div className="panel-body">
@@ -16,13 +16,20 @@ export class StaffList extends Component {
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Mã danh mục</th>
-                <th>Tên danh mục</th>
+                <th>Mã sản phẩm</th>
+                <th>Tên</th>
+                <th>Nhà sản xuất</th>
+                <th>Ngày sản xuất</th>
+                <th>Chất lượng</th>
+                <th>Mô tả</th>
+                {/* <th>Phòng</th> */}
+                {/* <th>Diện tích</th> */}
+                <th>Tình trạng</th>
                 <th>Hành động</th>
               </tr>
             </thead>
             <tbody>
-              {this.props.children}
+                {this.props.children}
             </tbody>
           </table>
         </div>
@@ -31,4 +38,4 @@ export class StaffList extends Component {
   }
 }
 
-export default StaffList
+export default ProductList

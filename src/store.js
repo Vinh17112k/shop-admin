@@ -1,21 +1,12 @@
 /* eslint-disable prettier/prettier */
-import allCompany from './reducers/company/company'
-import staffs from './reducers/staff/staffs'
-import itemEditting from './reducers/company/itemEditting'
-import staffEditting from './reducers/staff/staffEditting'
-import itemStaffEditting from './reducers/staffBuilding/staffEditting'
-import staffsBuilding from './reducers/staffBuilding/staffsBuilding'
-import services from './reducers/serviceBuilding/services'
-import serviceEditting from './reducers/serviceBuilding/serviceEditting'
-import allContract from './reducers/contract/contract'
-import contractEditting from './reducers/contract/contractEditting'
-import allRoom from './reducers/room/room'
-import roomEditting from './reducers/room/roomEditting'
-import auth from './reducers/login/auth'
-import search from './reducers/search/search'
-import { applyMiddleware, createStore } from 'redux'
-import { combineReducers } from 'redux'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunk from 'redux-thunk'
+import allCategory from './reducers/category/category'
+import itemCategory from './reducers/category/itemCategory'
+import auth from './reducers/login/auth'
+import itemProduct from './reducers/product/itemProduct'
+import allProduct from './reducers/product/product'
+import search from './reducers/search/search'
 const initialState = {
   sidebarShow: true,
 }
@@ -30,18 +21,10 @@ const changeState = (state = initialState, { type, ...rest }) => {
 }
 const appReducers = combineReducers({
   changeState,
-  allCompany,
-  itemEditting,
-  staffs,
-  staffEditting,
-  services,
-  serviceEditting,
-  itemStaffEditting,
-  staffsBuilding,
-  allContract,
-  contractEditting,
-  allRoom,
-  roomEditting,
+  allProduct,
+  allCategory,
+  itemCategory,
+  itemProduct,
   auth,
   search
 })
